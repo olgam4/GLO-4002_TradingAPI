@@ -1,0 +1,18 @@
+language: java
+sudo: false # faster builds
+
+branches:
+  only:
+  - master
+  - develop
+
+script:
+- mvn verify -B
+- mvn cobertura:cobertura
+
+notifications:
+  slack:
+    secure: Uv8uczwaDMgI4VXxQl5VMbNQOfcoSLphuwlhjXPgYvJcaObRmUsxJ0OpS/7YGkQVo+nQ27CAhSSqVS6XB6Y1AFPQTmUikcMMIDhO5MyhXU1d8gYZJ5dQQsCDlru4XPMKlgIdIc86/bAPnqP3/gUQnryPmfNSJp/R7A117uxGauQokX7THeRQjt8XEt4SkibyEQ8UA6817Zj7l0Fs+uK5KzYdLr7KNognosze6Y/2pe1bmZKNdMOfCkiEbdUq/TFiexKhJ3x8mV9H1N2XKHUsetOZ9R2Ay0M1qPia1LvTjacsT6rcOiUW3EVY5TVzm0sO+kSfvzHKZfOzIBDSC4y0+3j2kHQHKpJVqljsCFiLT4hQ8ITjwa5vUpglBds9L8u/zwRUrjNu3LmPNbjbtFXNgW0n82Wf5CXjDQzzuDqcyMnBakhOHEts/iTtl8+p+nyIGMnvQfEhabtDp8ObI6Ld5OF4gytCoP/uP19+KweUVLAh8WSrXELTiqV4AZz2GduIVKG4wkOwoKb53cBR+iu89qxruManw1K/ujZBeqirA1eViGtFFLJMz0KSm3y1uhhjpsa1IYaTWAo8MBqbajDiexVGwQBSb7pwnESk5lo/ArgOvuifkMBMF3uBj8pjtkYVjCwIf7WbnQzNWHtLdmXPjBUH4TbRRiN21zNkrx6oCEY=
+
+after_success:
+- bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
